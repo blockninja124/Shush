@@ -1,20 +1,11 @@
 package com.blockninja.shush.shush;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.network.chat.Component;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.config.ModConfigEvent;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Appender;
 import org.apache.logging.log4j.core.Layout;
@@ -23,8 +14,6 @@ import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.slf4j.Logger;
 
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +27,9 @@ public class Shush {
     private static final Logger LOGGER = LogUtils.getLogger();
     private static PrintStream originalOut;
 
-    public Shush(IEventBus modEventBus, ModContainer modContainer) {
+    public Shush(FMLJavaModLoadingContext loadingContext) {
+        IEventBus modEventBus = loadingContext.getModEventBus();
+
         modEventBus.addListener(this::onConfigLoad);
 
         LOGGER.info("Adding custom log appender");
@@ -53,7 +44,7 @@ public class Shush {
 
         LOGGER.info("Finished adding custom System.out");
 
-        modContainer.registerConfig(ModConfig.Type.STARTUP, Config.SPEC);
+        loadingContext.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     private void registerConsoleAppender() {
