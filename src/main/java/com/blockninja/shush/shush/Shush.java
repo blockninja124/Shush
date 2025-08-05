@@ -106,6 +106,10 @@ public class Shush {
 
     public void onConfigLoad(final ModConfigEvent event) {
 
+        // Make sure we don't accidentally cache the previous regex data
+        Config.regexPattern = null;
+
+
         if (Config.MATCHED_LOGS.get().isEmpty()) {
             LOGGER.info("No logs set to intercept");
             return;
