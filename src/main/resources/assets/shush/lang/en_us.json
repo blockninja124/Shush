@@ -1,8 +1,3 @@
 {
-  "shush.configuration.title": "Shush Config",
-  "shush.configuration.section.shush.startup.toml": "Shush Config",
-  "shush.configuration.section.shush.startup.toml.title": "Shush Config",
-  "shush.configuration.matchedLogs": "Log patterns to intercept",
-  "shush.configuration.matchedLogs.button": "Edit patterns",
-  "shush.configuration.matchedLogs.tooltip": "Regex patterns to remove from logs"
+
 }
