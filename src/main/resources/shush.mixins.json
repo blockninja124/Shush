@@ -2,7 +2,8 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.blockninja.shush.shush.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "shush.refmap.json",
   "mixins": [
   ],
   "client": [
